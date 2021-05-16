@@ -1,0 +1,17 @@
+<% nothing = true %>
+<% @appointments.each do |app| %>
+  <% if app.date.strftime('%d/%m/%Y') ==  @dates[num] and app.hour == hour %>
+    Reservado <br> <%= app.user.email %>
+    <i class="fa fa-eye"></i>
+    <% if app.user == current_user%>
+      <%= link_to app, method: :delete, data: { confirm: 'Tem Certeza?' },  remote: :true  do %>
+        <i class="bi bi-calendar-x-fill">X</i>
+      <% end %>
+    <% end %>
+
+    <% nothing = false%>
+  <% end %>
+<% end %>
+<% if nothing %>
+  <i class="available" >Disponível</i>
+<% end %>

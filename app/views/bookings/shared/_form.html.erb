@@ -1,0 +1,63 @@
+<header class="bg-primary text-white">
+  <div id="titulo" class="container text-center" >
+    <h1>Reservar Sala de Reunião</h1>
+  </div>
+</header>
+<section id="services" class="bg-light">
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 mx-auto">
+
+      <%= form_for([@booking],  html: { multipart: true }) do |f| %>
+        <% if booking.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(booking.errors.count, "error") %> prohibited this appointment from being saved:</h2>
+
+            <ul>
+              <% booking.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="row">
+          <div class="col-xs-6">
+            <div class="form-group">
+              <%= f.label :date %>
+              <%= f.date_field :date, class: "datepicker form-control" %>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-6">
+            <div class="form-group">
+              <%= f.label :hour %>
+              <%= f.select :hour , [['08:00', '08:00'], ['09:00', '09:00'], ['10:00', '10:00'], ['11:00', '11:00'], ['12:00', '12:00'], ['13:00', '13:00'], ['14:00', '15:00'], ['16:00', '16:00'],['17:00', '17:00']], {}, { class: "form-control" }%>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-6">
+            <div class="form-group">
+              <%= f.label :description %>
+              <%= f.text_area :description,  rows: 5, class: "form-control"  %>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-6">
+            <div class="form-group">
+              <%= submit_tag "#{t('buttons.save')}", class: "btn btn-primary btn-lg white"  %>
+
+              <%= link_to "#{t('buttons.back')}", bookings_path, class: 'btn btn-primary btn-lg white' %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+</section>
